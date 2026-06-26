@@ -121,3 +121,81 @@ Em metodos paramétricos, há o risco de a função f não ser realmente linear.
 Em métodos não paramétricos, não fazemos suposições sobre a forma da função f, então não temos esse risco. Conseguimos capturar relações mais complexas entre X e Y.
 
     > O problema é que métodos não paramétricos precisam de mais dados para estimar f com precisão. Se temos poucos dados, o método paramétrico pode ser melhor.
+
+Sendo assim, existe um **trade-off** ao escolher entre a acuração de previsões e a interpretação do modelo. Modelos paramétricos são mais fáceis de interpretar, mas podem não ser precisos. Modelos não paramétricos são mais precisos, mas mais difíceis de interpretar.
+
+![image](./media/2.7.png)
+
+Essa imagem contem diversos métodos de statistical learning.
+
+**Por que escolheríamos utilizar um modelo mais restritivo ao invés de um modelo flexível?**
+
+- Se pensamos em **inferência**, modelos restritivos são mais interpretáveis, então podemos entender melhor a relação entre X e Y.
+    - Em geral, modelos lineares são boas escolhas para inferência.
+
+- Se pensarmos em **predição**, modelos flexiveis conseguem fazer previsões mais precisas, mas é mais difícil de interpretar a relação entre Y e cada variável independente (X).
+
+Modelos mais flexíveis possuem mais risco de **overfitting**, ou seja, o modelo se ajusta muito bem aos dados de treinamento, mas não consegue generalizar para novos dados.
+
+Por conta disso, modelos menos flexíveis podem fazer previsões mais precisas do que modelos mais flexíveis.
+
+## Supervised vs Unsupervised Learning
+
+Em problemas de **Supervised Learning**, para cada observação $x_i$ temos um valor correspondente $y_i$. O objetivo é aprender a relação entre X e Y.
+
+Problemas de **Unsupervised Learning** são mais desafiadores. Para cada observação $x_i$ não temos um valor correspondente $y_i$. Não é possível construir um modelo de regressão linear já que não temos a variável dependente.
+
+Então o que podemos analizar em problemas de unsupervised learning?
+
+- Entender a relação entre as variáveis
+- Clustering: Agrupar observações similares em grupos de acordo com $x_1, x_2, ..., x_n$.
+
+![image](./media/2.8.png)
+
+Essa imagem mostra um plot com 150 observações com medidas em duas variáveis. O objetivo é determinar o grupo a qual cada observação pertence.
+À esquerda, a tarefa foi mais fácil já que os grupos estão bem separados. À direita, a tarefa foi mais dificil já que os grupos estão um pouco misturados, há **overlap** entre os grupos.  
+
+Os modelos de unsupervised learning nem sempre vão separrar os grupos corretamente em caso de overlaping.
+
+Existem casos em que os dados de treino possuem uma parte de observações rotuladas, mas as demais não. Esse tipo de problema é chamado de **semi-supervised learning**.
+
+## Regression vs Classification Problems
+
+**Quantitative variables**: Podem assumir (infinitos) valores numéricos, como preço, peso, altura, etc.
+**Qualitative variables**: Podem assumir uma das K classes ou categorias como sexo, cor, tipo de produto...
+
+O problema que estamos estudando busca uma resposta quantitativa ou qualitativa?
+
+## Model Accuracy
+
+Existem vários métodos de Statistical Learning, mas como podemos saber qual é o melhor para cada problema? 
+
+Na estatística, não há um método certo ou melhor que todos. Tudo depende do problema que estamos tentando resolver.
+
+Então, para escolher o melhor modelo, precisamos de uma forma de medir a acurácia do modelo: O quão bem suas previsões seaproximam dos valores reais (dados observados).
+
+### MSE: Mean Squared Error
+
+$MSE = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$
+
+ou seja:
+
+$MSE = \frac{1}{n}\sum_{i=1}^{n}(y_i - f(x_i))^2$
+
+    Para cada par $(x_i, y_i)$, calculamos a diferença entre o valor real $y_i$ e o valor previsto pelo modelo $\hat{y}_i$;
+
+    Elevamos essa diferença ao quadrado e somamos para todas as observações;
+    
+    Dividimos pelo número de observações n.
+
+Quanto menor o MSE, melhor o modelo (mais próximas suas previsões estão dos valores reais).
+
+**Training MSE**:
+
+$MSE = \frac{1}{n}\sum_{i=1}^{n}(y_i - f(x_i))^2$
+
+Calculamos o MSE utilizando os **dados de treino** (training data), os mesmos que treinaram o modelo.
+
+**Test MSE**:
+
+Entretanto, podemos privar algumas observações do conjunto de treino e utilizar essas observações para testar o modelo. Esse conjunto de dados é chamado de **test data**.
